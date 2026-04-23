@@ -1,0 +1,24 @@
+package controller;
+
+import javax.swing.JPanel;
+import view.Janela;
+
+public class Navegador {
+    private Janela janela;
+
+    public Navegador(Janela janela) {
+        this.janela = janela;
+    }
+
+    public void adicionarPainel(String nome, JPanel tela) {
+        this.janela.adicionarTela(nome, tela);
+    }
+
+    public void navegarPara(String nome) {
+        this.janela.mostrarTela(nome);
+    }
+
+    public Janela getJanela() {
+        return janela;
+    }
+}
