@@ -14,6 +14,7 @@ public class TelaCompra extends JPanel {
     private JButton btnRemover;
     private JButton btnFinalizar;
     private JButton btnNotaFiscal;
+    private JButton btnVoltar;
 
     public TelaCompra() {
         setLayout(new MigLayout("fill", "[grow][grow]", "[][grow][]"));
@@ -21,7 +22,7 @@ public class TelaCompra extends JPanel {
         JLabel titulo = new JLabel("Compra de Produtos");
         titulo.setFont(new Font("Arial", Font.BOLD, 22));
 
-        add(titulo, "span 2, center, wrap");
+        add(titulo, "cell 0 0 2 1,alignx center");
 
         String[] colunasProdutos = {"ID", "Produto", "Preço", "Estoque"};
         DefaultTableModel modeloProdutos = new DefaultTableModel(colunasProdutos, 0);
@@ -33,7 +34,7 @@ public class TelaCompra extends JPanel {
         painelProdutos.setBorder(BorderFactory.createTitledBorder("Produtos"));
         painelProdutos.add(scrollProdutos, "grow");
 
-        add(painelProdutos, "grow");
+        add(painelProdutos, "cell 0 1,grow");
 
         String[] colunasCarrinho = {"Produto", "Qtd", "Subtotal"};
         DefaultTableModel modeloCarrinho = new DefaultTableModel(colunasCarrinho, 0);
@@ -45,23 +46,26 @@ public class TelaCompra extends JPanel {
         painelCarrinho.setBorder(BorderFactory.createTitledBorder("Carrinho"));
         painelCarrinho.add(scrollCarrinho, "grow");
 
-        add(painelCarrinho, "grow, wrap");
+        add(painelCarrinho, "cell 1 1,grow");
 
         btnAdicionar = new JButton("Adicionar >>");
         btnRemover = new JButton("<< Remover");
 
-        add(btnAdicionar, "split 2, center");
-        add(btnRemover, "wrap");
+        add(btnAdicionar, "cell 0 2,alignx center");
+        add(btnRemover, "cell 0 2");
 
         lblTotal = new JLabel("Total: R$ 0,00");
         lblTotal.setFont(new Font("Arial", Font.BOLD, 18));
 
         btnFinalizar = new JButton("Finalizar Compra");
         btnNotaFiscal = new JButton("Emitir Nota Fiscal");
+        
+        btnVoltar = new JButton("Voltar");
+        add(btnVoltar, "cell 1 2,alignx right");
 
-        add(lblTotal, "left");
-        add(btnFinalizar, "split 2, right");
-        add(btnNotaFiscal);
+        add(lblTotal, "cell 0 3,alignx left");
+        add(btnFinalizar, "cell 1 3,alignx right");
+        add(btnNotaFiscal, "cell 1 3");
     }
 
     public JTable getTabelaProdutos() {

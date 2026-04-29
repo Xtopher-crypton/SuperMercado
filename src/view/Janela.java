@@ -7,13 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-/**
- * Janela principal da aplicacao usando CardLayout para navegar entre telas.
- *
- * Implementa java.security.Principal porque TelaCadastrarProduto exige
- * um objeto Principal em seu construtor — esse e o contrato da view
- * original que nao pode ser alterada.
- */
+
 public class Janela extends JFrame implements Principal {
 
     private static final long serialVersionUID = 1L;

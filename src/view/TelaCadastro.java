@@ -53,6 +53,9 @@ public class TelaCadastro extends JPanel {
 		btnCadastrar.setForeground(new Color(255, 255, 255));
 		btnCadastrar.setBackground(new Color(0, 0, 0));
 		add(btnCadastrar, "cell 3 6,grow");
+		
+		JButton btnVoltar = new JButton("Voltar");
+		add(btnVoltar, "cell 3 7,alignx center,aligny center");
 
 	}
 

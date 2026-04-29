@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Conexao {
     private static final String URL  = "jdbc:mysql://localhost:3306/db_supermercado";
     private static final String USER = "root";
-    private static final String PASS = "DHQje6ff-NF2K2y";
+    private static final String PASS = "admin";
 
     public static Connection getConexao() {
         try {

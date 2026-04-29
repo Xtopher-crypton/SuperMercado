@@ -27,7 +27,6 @@ public class ProdutoController {
         this.view = view;
         this.navegador = navegador;
 
-        // TelaCadastrarProduto nao tem getters, buscamos os componentes diretamente
         List<JTextField> campos = new ArrayList<>();
         List<JButton> botoes = new ArrayList<>();
 
@@ -45,7 +44,6 @@ public class ProdutoController {
         tfPreco = campos.get(2);
         tfQuantidade = campos.get(3);
 
-        // Ao selecionar uma linha, preenche os campos para edicao
         if (table != null) {
             table.getSelectionModel().addListSelectionListener(e -> {
                 if (!e.getValueIsAdjusting()) {

@@ -23,8 +23,6 @@ public class LoginController {
         this.produtoController = produtoController;
         this.telaCompra = telaCompra;
 
-        // Bug na view: btnEntrar nunca foi atribuido ao campo, existe so como variavel local.
-        // Solucao: buscar o botao pelos componentes do painel pelo texto "Entrar".
         for (Component c : view.getComponents()) {
             if (c instanceof JButton && "Entrar".equals(((JButton) c).getText())) {
                 ((JButton) c).addActionListener(e -> fazerLogin());

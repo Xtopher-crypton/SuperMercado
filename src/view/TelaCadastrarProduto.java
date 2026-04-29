@@ -47,6 +47,9 @@ public class TelaCadastrarProduto extends JPanel {
 		add(new JLabel("Quantidade:"), "cell 1 8,alignx trailing");
 		tfQuantidade = new JTextField();
 		add(tfQuantidade, "cell 2 8 2 1,grow");
+		
+		JButton btnVoltar = new JButton("Voltar");
+		add(btnVoltar, "flowx,cell 1 10");
 
 		JButton btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.setBackground(Color.BLACK);

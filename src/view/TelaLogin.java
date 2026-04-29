@@ -26,10 +26,6 @@ public class TelaLogin extends JPanel {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		add(lblNewLabel, "cell 1 0 4 1,alignx center,aligny center");
 		
-		JRadioButton rdbtnAdministrador = new JRadioButton("Administrador");
-		rdbtnAdministrador.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		add(rdbtnAdministrador, "cell 1 1 4 1,alignx center,aligny center");
-		
 		JLabel lblNewLabel_1 = new JLabel("Nome:");
 		add(lblNewLabel_1, "cell 1 2,alignx trailing");
 		
@@ -37,14 +33,12 @@ public class TelaLogin extends JPanel {
 		add(tFNome, "cell 2 2 3 1,grow");
 		tFNome.setColumns(10);
 		
-		
 		JLabel lblNewLabel_2 = new JLabel("CPF:");
 		add(lblNewLabel_2, "cell 1 4,alignx trailing");
 		
 		tFCpf = new JTextField();
 		add(tFCpf, "cell 2 4 3 1,grow");
 		tFCpf.setColumns(10);
-		
 		
 		JButton btnLogin = new JButton("Entrar");
 		btnLogin.setForeground(new Color(255, 255, 255));

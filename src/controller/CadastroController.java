@@ -22,7 +22,6 @@ public class CadastroController {
         this.view = view;
         this.navegador = navegador;
 
-        // TelaCadastro nao tem getters, entao buscamos os componentes diretamente
         List<JTextField> campos = new ArrayList<>();
         List<JRadioButton> radios = new ArrayList<>();
         List<JButton> botoes = new ArrayList<>();
@@ -39,7 +38,14 @@ public class CadastroController {
 
         if (!botoes.isEmpty()) {
             botoes.get(0).addActionListener(e -> executarCadastro());
+            if (botoes.size() > 1) {
+                botoes.get(1).addActionListener(e -> voltar());
+            }
         }
+    }
+
+    private void voltar() {
+        this.navegador.navegarPara("LOGIN");
     }
 
     private void executarCadastro() {
