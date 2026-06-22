@@ -21,11 +21,11 @@ public class UsuarioDAO {
             if (rs.next()) {
                 return rs.getString("perfil");
             }
+            return null;
 
         } catch (SQLException e) {
-            System.err.println("Erro ao validar login: " + e.getMessage());
+            throw new SupermercadoException("Erro ao validar login: " + e.getMessage());
         }
-        return null;
     }
 
     public void cadastrarUsuario(String nome, String cpf, String perfil) {
@@ -40,8 +40,7 @@ public class UsuarioDAO {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            System.err.println("Erro ao cadastrar usuario: " + e.getMessage());
-            javax.swing.JOptionPane.showMessageDialog(null, "Erro: CPF ja cadastrado!");
+            throw new SupermercadoException("Erro ao registar utilizador. O CPF já pode estar registado!");
         }
     }
 }

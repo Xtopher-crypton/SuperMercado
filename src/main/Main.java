@@ -1,4 +1,4 @@
-package main;
+	package main;
 
 import controller.CadastroController;
 import controller.CompraController;
@@ -28,7 +28,7 @@ public class Main {
         navegador.adicionarPainel("COMPRA", telaCompra);
 
         ProdutoController produtoController = new ProdutoController(telaProduto, navegador);
-        new CompraController(telaCompra);
+        new CompraController(telaCompra, navegador);
         new CadastroController(telaCadastro, navegador);
         new LoginController(telaLogin, navegador, produtoController, telaCompra);
 

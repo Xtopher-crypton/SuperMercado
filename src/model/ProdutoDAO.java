@@ -21,10 +21,8 @@ public class ProdutoDAO {
             stmt.setInt(3, p.getQtdEstoque());
             stmt.executeUpdate();
 
-            System.out.println("Produto cadastrado com sucesso!");
-
         } catch (SQLException e) {
-            System.err.println("Erro ao cadastrar produto: " + e.getMessage());
+            throw new SupermercadoException("Erro ao cadastrar produto: " + e.getMessage());
         }
     }
 
@@ -40,10 +38,8 @@ public class ProdutoDAO {
             stmt.setInt(4, p.getId());
             stmt.executeUpdate();
 
-            System.out.println("Produto atualizado com sucesso!");
-
         } catch (SQLException e) {
-            System.err.println("Erro ao atualizar produto: " + e.getMessage());
+            throw new SupermercadoException("Erro ao atualizar produto: " + e.getMessage());
         }
     }
 
@@ -56,10 +52,8 @@ public class ProdutoDAO {
             stmt.setInt(1, id);
             stmt.executeUpdate();
 
-            System.out.println("Produto excluido com sucesso!");
-
         } catch (SQLException e) {
-            System.err.println("Erro ao excluir produto: " + e.getMessage());
+            throw new SupermercadoException("Erro ao excluir produto: " + e.getMessage());
         }
     }
 
@@ -81,7 +75,7 @@ public class ProdutoDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Erro ao listar produtos: " + e.getMessage());
+            throw new SupermercadoException("Erro ao listar produtos: " + e.getMessage());
         }
         return lista;
     }
@@ -97,7 +91,26 @@ public class ProdutoDAO {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            System.err.println("Erro ao atualizar estoque: " + e.getMessage());
+            throw new SupermercadoException("Erro ao atualizar estoque: " + e.getMessage());
+        }
+    }
+
+    // NOVO MÉTODO: Verifica se já existe um produto com o nome, ignorando o ID fornecido
+    public boolean existeProdutoPorNome(String nome, int idIgnorado) {
+        String sql = "select id from produtos where nome = ? and id != ?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nome);
+            stmt.setInt(2, idIgnorado);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next(); // Retorna true se encontrou algum registo
+            }
+
+        } catch (SQLException e) {
+            throw new SupermercadoException("Erro ao verificar nome do produto: " + e.getMessage());
         }
     }
 }

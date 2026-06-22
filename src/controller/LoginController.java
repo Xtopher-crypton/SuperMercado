@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import model.Produto;
 import model.ProdutoDAO;
 import model.UsuarioDAO;
+import model.SupermercadoException;
 import view.TelaCompra;
 import view.TelaLogin;
 
@@ -38,30 +39,44 @@ public class LoginController {
 
     private void fazerLogin() {
         String nome = view.gettFNome().getText().trim();
-        String cpf = view.gettFCpf().getText().trim();
+        String cpfOriginal = view.gettFCpf().getText().trim();
+        
+        // Limpa possíveis pontos e traços na hora de consultar a base de dados
+        String cpfLimpo = cpfOriginal.replace(".", "").replace("-", "");
 
-        if (nome.isEmpty() || cpf.isEmpty()) {
+        if (nome.isEmpty() || cpfLimpo.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
             return;
         }
 
-        UsuarioDAO dao = new UsuarioDAO();
-        String perfil = dao.validarLogin(nome, cpf);
+        // Verifica se o utilizador digitou letras no CPF de Login
+        if (!cpfLimpo.matches("\\d+")) {
+            JOptionPane.showMessageDialog(null, "O CPF deve conter apenas números.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-        if (perfil == null) {
-            JOptionPane.showMessageDialog(null, "Usuario ou CPF incorretos!");
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
+            // Valida utilizando o CPF limpo
+            String perfil = dao.validarLogin(nome, cpfLimpo);
 
-        } else if (perfil.equalsIgnoreCase("Admin")) {
-            JOptionPane.showMessageDialog(null, "Bem-vindo, Administrador!");
-            view.limpaCampos();
-            produtoController.carregarTabela();
-            navegador.navegarPara("CADASTRO_PRODUTO");
+            if (perfil == null) {
+                JOptionPane.showMessageDialog(null, "Utilizador ou CPF incorretos!");
 
-        } else {
-            JOptionPane.showMessageDialog(null, "Bem-vindo, Cliente!");
-            view.limpaCampos();
-            carregarProdutosCompra();
-            navegador.navegarPara("COMPRA");
+            } else if (perfil.equalsIgnoreCase("Admin")) {
+                JOptionPane.showMessageDialog(null, "Bem-vindo, Administrador!");
+                view.limpaCampos();
+                produtoController.carregarTabela();
+                navegador.navegarPara("CADASTRO_PRODUTO");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Bem-vindo, Cliente!");
+                view.limpaCampos();
+                carregarProdutosCompra();
+                navegador.navegarPara("COMPRA");
+            }
+        } catch (SupermercadoException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro no Sistema", JOptionPane.ERROR_MESSAGE);
         }
     }
 
